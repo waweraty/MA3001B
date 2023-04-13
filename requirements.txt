@@ -3,7 +3,6 @@ numpy
 matplotlib
 colour
 tensorflow
-opencv-python-headless
 pandas
 scikit-learn
 streamlit
