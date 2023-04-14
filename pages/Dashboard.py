@@ -3,6 +3,7 @@ import numpy as np
 import time
 import pandas as pd
 import seaborn as sns
+import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="Dashboard", page_icon="📈")
 
@@ -23,7 +24,9 @@ def get_data():
 df = get_data()
 st.write(df)
 
-st.pyplot(sns.countplot(x=df["activity_subtype_id"]))
+fig, ax = plt.subplots()
+sns.countplot(x=df["activity_subtype_id"],ax=ax)
+st.pyplot(fig)
 
 
 progress_bar = st.sidebar.progress(0)
