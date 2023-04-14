@@ -23,6 +23,6 @@ df = get_data()
 st.write(df)
 
 fig, ax = plt.subplots()
-fig.set_size_inches(10, 15)
+fig.set_size_inches(15, 10)
 sns.countplot(x=df["activity_subtype_id"],ax=ax)
 st.pyplot(fig)
