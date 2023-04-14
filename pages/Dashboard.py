@@ -1,6 +1,8 @@
 import streamlit as st
 import numpy as np
 import time
+import pandas as pd
+import seaborn as sns
 
 st.set_page_config(page_title="Dashboard", page_icon="📈")
 
@@ -12,6 +14,17 @@ st.write(
 Streamlit. We're generating a bunch of random numbers in a loop for around
 5 seconds. Enjoy!"""
 )
+
+@st.cache_data
+def get_data():
+    df = pd.read_csv('datosMDF_US.csv')
+    return df
+
+df = get_data()
+st.write(df)
+
+st.pyplot(sns.countplot(x=df["activity_subtype_id"]))
+
 
 progress_bar = st.sidebar.progress(0)
 status_text = st.sidebar.empty()
