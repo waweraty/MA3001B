@@ -4,6 +4,8 @@ import pickle
 import numpy as np
 import pandas as pd
 
+st.set_page_config(page_title="Predictor Unitario", page_icon="1")
+
 class ProgramCategorizer:
   def __init__(self):
     # Define diferentes expresiones regulares que indican si el nombre del porgrama puede pertenecer a alguna clase
@@ -107,8 +109,6 @@ def load_model():
 
 #program_categorizer = load_model()
 program_categorizer= ProgramCategorizer()
-
-st.set_page_config(page_title="Predictor Unitario", page_icon="1")
 
 st.markdown("# Predictor Unitario")
 st.sidebar.header("Predictor Unitario")
