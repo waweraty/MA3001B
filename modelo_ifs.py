@@ -1,3 +1,7 @@
+import numpy as np
+import pandas as pd
+import re
+
 class ProgramCategorizer:
   def __init__(self):
     # Define diferentes expresiones regulares que indican si el nombre del porgrama puede pertenecer a alguna clase

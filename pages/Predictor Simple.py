@@ -1,8 +1,5 @@
 import streamlit as st
-import re
 import pickle
-import numpy as np
-import pandas as pd
 from modelo_ifs import *
 
 st.set_page_config(page_title="Predictor Unitario", page_icon="1")
