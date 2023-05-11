@@ -23,4 +23,4 @@ if text_input:
 
         st.write("Nombre del programa: ", text_input)
         st.write('Categoría predicha: ', pred)
-        st.write('Categoría real')
+        #st.write('Categoría real')
