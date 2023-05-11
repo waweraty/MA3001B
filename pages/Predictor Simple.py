@@ -1,6 +1,8 @@
 import streamlit as st
 import re
 import pickle
+import numpy as np
+import pandas as pd
 
 class ProgramCategorizer:
   def __init__(self):
@@ -93,7 +95,7 @@ class ProgramCategorizer:
     else:
         raise ValueError('program_name debe ser una cadena o una matriz de cadenas.')
 
-
+'''
 @st.cache_resource
 def load_model():
         with open('modelo_ifs_2.pkl', 'rb') as f:
@@ -101,9 +103,10 @@ def load_model():
             f.close()
 
         return model
+'''
 
-
-program_categorizer = load_model()
+#program_categorizer = load_model()
+program_categorizer= ProgramCategorizer()
 
 st.set_page_config(page_title="Predictor Unitario", page_icon="1")
 
