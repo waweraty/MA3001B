@@ -32,7 +32,7 @@ if uploaded_file is not None:
         csv = convert_df(dataframe)
 
         st.download_button(
-            "Press to Download",
+            "Descargar csv",
             csv,
             "file.csv",
             "text/csv",
