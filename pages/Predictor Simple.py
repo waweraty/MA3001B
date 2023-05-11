@@ -94,7 +94,7 @@ class ProgramCategorizer:
         raise ValueError('program_name debe ser una cadena o una matriz de cadenas.')
 
 
-@st.cache
+@st.cache_resource
 def load_model():
         with open('modelo_ifs_2.pkl', 'rb') as f:
             model = pickle.load(f)
