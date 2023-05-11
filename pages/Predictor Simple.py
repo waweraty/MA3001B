@@ -4,8 +4,9 @@ import pickle
 
 @st.cache
 def load_model():
-        pkl = open("modelo_ifs.pkl", "rb")
-        model = pickle.load(pkl)
+        with open('modelo_ifs_2.pkl', 'rb') as f:
+            model = pickle.load(f)
+            f.close()
 
         return model
 
