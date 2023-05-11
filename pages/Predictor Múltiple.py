@@ -1,9 +1,14 @@
 import streamlit as st
 import pandas as pd
-import altair as alt
-from urllib.error import URLError
+from modelo_ifs import *
 
 st.set_page_config(page_title="Predictor Múltiple", page_icon="🦾")
+
+@st.experimental_memo
+def convert_df(df):
+   return df.to_csv(index=False).encode('utf-8')
+
+program_categorizer= ProgramCategorizer()
 
 st.markdown("# Predictor Múltiple")
 st.sidebar.header("Predictor Múltiple")
@@ -13,44 +18,23 @@ st.write(
     se regresa un archivo con una nueva columna con la categoría predicha"""
 )
 
-@st.cache_data
-def get_UN_data():
-    AWS_BUCKET_URL = "http://streamlit-demo-data.s3-us-west-2.amazonaws.com"
-    df = pd.read_csv(AWS_BUCKET_URL + "/agri.csv.gz")
-    return df.set_index("Region")
+uploaded_file = st.file_uploader("Sube el archivo .csv con columna program_name")
 
+if uploaded_file is not None:
+    dataframe = pd.read_csv(uploaded_file)
+    st.write(dataframe)
 
-try:
-    df = get_UN_data()
-    countries = st.multiselect(
-        "Choose countries", list(df.index), ["China", "United States of America"]
-    )
-    if not countries:
-        st.error("Please select at least one country.")
-    else:
-        data = df.loc[countries]
-        data /= 1000000.0
-        st.write("### Gross Agricultural Production ($B)", data.sort_index())
+    if st.button('Predecir valores'):
+        pred=program_categorizer.categorize_program(dataframe['program_name'])
+        dataframe['Predictions']=pred
+        dataframe
+        
+        csv = convert_df(dataframe)
 
-        data = data.T.reset_index()
-        data = pd.melt(data, id_vars=["index"]).rename(
-            columns={"index": "year", "value": "Gross Agricultural Product ($B)"}
-        )
-        chart = (
-            alt.Chart(data)
-            .mark_area(opacity=0.3)
-            .encode(
-                x="year:T",
-                y=alt.Y("Gross Agricultural Product ($B):Q", stack=None),
-                color="Region:N",
+        st.download_button(
+            "Press to Download",
+            csv,
+            "file.csv",
+            "text/csv",
+            key='download-csv'
             )
-        )
-        st.altair_chart(chart, use_container_width=True)
-except URLError as e:
-    st.error(
-        """
-        **This demo requires internet access.**
-        Connection error: %s
-    """
-        % e.reason
-    )
