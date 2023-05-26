@@ -10,3 +10,6 @@ seaborn
 nltk
 plotly
 umap
+umap-learn[plot]
+holoviews
+ipykernel
