@@ -51,7 +51,7 @@ def get_embedding():
 
 @st.cache_data
 def get_data():
-    data=pickle.load(open('data_sd.csv','rb'))
+    data=pickle.load(open('datos_sd.csv','rb'))
     data.reset_index(drop = True, inplace = True)
     return data
 
