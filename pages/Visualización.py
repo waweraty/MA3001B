@@ -7,9 +7,9 @@ import matplotlib.pyplot as plt
 import os
 import urllib.request
 import pickle
-#import umap
-import umap.umap_ as umap
-#import umap.plot
+import umap
+import umap.umap_ as umap_
+import umap.plot
 import re
 import nltk
 nltk.download('punkt')
@@ -83,10 +83,10 @@ def get_wordnet_pos(treebank_tag):
 def visKnear(data, texto,cattype, K=10):
     vectorizer = get_vect()
 
-
-    fit = umap.UMAP( n_neighbors=50, min_dist=0.1,n_components=2,metric='braycurtis')
-    u = fit.fit_transform(data.iloc[:,:-3].values)
-    #u=u.values
+    u = get_embedding()
+    fit= get_umap()
+    u=u.values
+    
     textoarray = (vectorizer.transform(texto)).toarray()
     distarr=[braycurtis(r, textoarray[0]) for r in data.iloc[:,:-3].values]
     res = sorted(range(len(distarr)), key=lambda sub: distarr[sub])[:K]
@@ -111,8 +111,6 @@ def visKnear(data, texto,cattype, K=10):
 download_umap()
 
 data = get_data()
-#u = get_embedding()
-#fit= get_umap()
 
 
 
