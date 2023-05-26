@@ -46,7 +46,7 @@ def get_vect():
 
 @st.cache_data
 def get_embedding():
-    u=pickle.load(open('embedding.csv','rb'))
+    u=pd.read_pickle('embedding.csv')
     return u
 
 @st.cache_data
