@@ -111,7 +111,7 @@ data = get_data()
 #u = get_embedding()
 #fit= get_umap()
 
-fit = umap_.UMAP( n_neighbors=50, min_dist=0.1,n_components=2,metric='braycurtis')
+fit = umap.UMAP( n_neighbors=50, min_dist=0.1,n_components=2,metric='braycurtis')
 u = fit.transform(data.iloc[:,:-3].values)
 
 st.write(
