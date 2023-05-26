@@ -107,7 +107,6 @@ download_umap()
 data = get_data()
 u = get_embedding()
 fit= get_umap()
-st.write(data)
 
 st.write(
     """En esta aplicación se ingresa el nombre del programa para ubicar a los 10 programas con títulos más cercanos"""
