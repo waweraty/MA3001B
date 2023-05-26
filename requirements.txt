@@ -1,15 +1,16 @@
 pillow
-numpy
 matplotlib
 colour
-tensorflow
 pandas
 scikit-learn
 streamlit
 seaborn
 nltk
 plotly
-umap
-umap-learn
 holoviews
 ipykernel
+numpy<=1.20 # for numba
+numba
+umap
+umap-learn
+bokeh
