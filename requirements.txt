@@ -9,3 +9,4 @@ streamlit
 seaborn
 nltk
 plotly
+umap
