@@ -26,7 +26,7 @@ st.write(
     """Primeras visualizaciones"""
 )
 
-@st.cache_data
+@st.cache_resource
 def download_umap():
 	url='https://github.com/waweraty/MA3001B/releases/download/model/umap.pickle'
 
