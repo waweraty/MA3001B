@@ -9,7 +9,7 @@ import urllib.request
 import pickle
 #import umap
 import umap.umap_ as umap
-import umap.plot
+#import umap.plot
 import re
 import nltk
 nltk.download('punkt')
