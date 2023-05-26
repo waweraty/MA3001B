@@ -83,7 +83,7 @@ def get_wordnet_pos(treebank_tag):
 def visKnear(data, texto, u,cattype, fit, K=10):
     vectorizer = get_vect()
 
-    u=u.values
+    #u=u.values
     textoarray = (vectorizer.transform(texto)).toarray()
     distarr=[braycurtis(r, textoarray[0]) for r in data.iloc[:,:-3].values]
     res = sorted(range(len(distarr)), key=lambda sub: distarr[sub])[:K]
