@@ -7,6 +7,9 @@ import matplotlib.pyplot as plt
 import os
 import urllib.request
 import pickle
+import umap
+import umap.umap_ as umap_
+import umap.plot
 import re
 import nltk
 nltk.download('punkt')
