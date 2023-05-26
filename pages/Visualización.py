@@ -112,7 +112,7 @@ data = get_data()
 #fit= get_umap()
 
 fit = umap.UMAP( n_neighbors=50, min_dist=0.1,n_components=2,metric='braycurtis')
-u = fit.transform(data.iloc[:,:-3].values)
+u = fit.fit_transform(data.iloc[:,:-3].values)
 
 st.write(
     """En esta aplicación se ingresa el nombre del programa para ubicar a los 10 programas con títulos más cercanos"""
