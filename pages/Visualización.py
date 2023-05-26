@@ -115,5 +115,5 @@ st.write(
 text_input = st.text_input('Nombre del programa', placeholder="Favor de ingresar el nombre del programa")
 
 if text_input:
-    visKnear(data, text_input, u, 'activity_subtype', fit, 10)
-    visKnear(data, text_input, u, 'activity_subtype_id', fit, 10)
+    visKnear(data, [text_input], u, 'activity_subtype', fit, 10)
+    visKnear(data, [text_input], u, 'activity_subtype_id', fit, 10)
