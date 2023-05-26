@@ -10,7 +10,7 @@ plotly
 holoviews
 ipykernel
 numpy
-numba
+numba <= 0.56.4
 umap
 umap-learn
 bokeh
