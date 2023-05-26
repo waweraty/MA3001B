@@ -80,10 +80,10 @@ def get_wordnet_pos(treebank_tag):
     else:
         return 'n' # assume noun as default
 
-def visKnear(data, texto, umap,cattype, fit, K=10):
+def visKnear(data, texto, u,cattype, fit, K=10):
     vectorizer = get_vect()
 
-    umap=umap.values
+    u=u.values
     textoarray = (vectorizer.transform(texto)).toarray()
     distarr=[braycurtis(r, textoarray[0]) for r in data.iloc[:,:-3].values]
     res = sorted(range(len(distarr)), key=lambda sub: distarr[sub])[:K]
@@ -91,7 +91,7 @@ def visKnear(data, texto, umap,cattype, fit, K=10):
     u_consulta = fit.transform(textoarray)
     tu_consulta_row = pd.DataFrame({'program_name':texto[0], cattype:'Tu Consulta'},index=[0])
 
-    fig = px.scatter(data.iloc[res], x=umap[res,0], y=umap[res,1], color=cattype, hover_name="program_name", log_x=False)
+    fig = px.scatter(data.iloc[res], x=u[res,0], y=u[res,1], color=cattype, hover_name="program_name", log_x=False)
     fig.update_traces(marker_size=10)  # Set the initial marker size for all points
 
     # Create a separate trace for the "Tu Consulta" point with a bigger marker size
@@ -108,8 +108,11 @@ def visKnear(data, texto, umap,cattype, fit, K=10):
 download_umap()
 
 data = get_data()
-u = get_embedding()
-fit= get_umap()
+#u = get_embedding()
+#fit= get_umap()
+
+fit = umap_.UMAP( n_neighbors=50, min_dist=0.1,n_components=2,metric='braycurtis')
+u = fit.transform(data.iloc[:,:-3].values)
 
 st.write(
     """En esta aplicación se ingresa el nombre del programa para ubicar a los 10 programas con títulos más cercanos"""
