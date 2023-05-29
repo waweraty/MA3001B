@@ -16,10 +16,10 @@ from nltk.stem import WordNetLemmatizer
 from scipy.spatial.distance import braycurtis
 import plotly.express as px
 
-st.set_page_config(page_title="Dashboard", page_icon="📈")
+st.set_page_config(page_title="Visualización", page_icon="📈")
 
-st.markdown("# Dashboard")
-st.sidebar.header("Dashboard")
+st.markdown("# Visualización Vecinos más Cercanos")
+st.sidebar.header("Visualización")
 
 st.write(
     """Primeras visualizaciones"""
