@@ -100,7 +100,7 @@ def visKnear(data, texto, umap,cattype, fit, K=10):
     u_consulta = fit.transform(textoarray)
     tu_consulta_row = pd.DataFrame({'program_name':texto[0], cattype:'Tu Consulta'},index=[0])
 
-    fig = px.scatter(pred.loc[pred['program_name'].isin(data[res]['program_name'].values)], x=u[res,0], y=u[res,1], color=('pred_'+cattype), hover_name="program_name", log_x=False)
+    fig = px.scatter(pred.loc[pred['program_name'].isin(data.iloc[res]['program_name'].values)], x=u[res,0], y=u[res,1], color=('pred_'+cattype), hover_name="program_name", log_x=False)
     fig.update_traces(marker_size=10)  # Set the initial marker size for all points
 
     # Create a separate trace for the "Tu Consulta" point with a bigger marker size
