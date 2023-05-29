@@ -109,7 +109,7 @@ def visKnear(data, texto, umap,cattype, fit, K=10):
     # Add the "Tu Consulta" trace to the figure
     fig.add_traces(tu_consulta_trace.data)
     fig.update_layout(title=("10 programas con títulos más similares a tu consulta, por " + cattype))
-    fig.show()
+    st.plotly_chart(fig, use_container_width=True)
 
 start_nltk()
 download_umap()
