@@ -85,9 +85,6 @@ def get_wordnet_pos(treebank_tag):
 
 def visKnear(data, texto, umap,cattype, fit, K=10):
     vectorizer = get_vect()
-    st.write('Running Visualization Function')
-    
-    
     u=umap.values
 
     textoarray = (vectorizer.transform(texto)).toarray()
