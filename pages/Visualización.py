@@ -61,6 +61,12 @@ def get_data():
     data.reset_index(drop = True, inplace = True)
     return data
 
+@st.cache_data
+def get_pred(data):
+    pred=pd.read_csv('df_pred.csv')
+    data= data.merge(pred, how='left', on='program_name')
+    return data
+
 def preprocess_text(text):
     text = text.lower()
     text = re.sub(r'\b\d+\w*\b|\b\w*\d+\b', '', text)
@@ -84,6 +90,7 @@ def get_wordnet_pos(treebank_tag):
         return 'n' # assume noun as default
 
 def visKnear(data, texto, umap,cattype, fit, K=10):
+    data = get_pred(data)
     vectorizer = get_vect()
     u=umap.values
 
@@ -94,7 +101,7 @@ def visKnear(data, texto, umap,cattype, fit, K=10):
     u_consulta = fit.transform(textoarray)
     tu_consulta_row = pd.DataFrame({'program_name':texto[0], cattype:'Tu Consulta'},index=[0])
 
-    fig = px.scatter(data.iloc[res], x=u[res,0], y=u[res,1], color=cattype, hover_name="program_name", log_x=False)
+    fig = px.scatter(data.iloc[res], x=u[res,0], y=u[res,1], color=('pred_'+cattype), hover_name="program_name", log_x=False)
     fig.update_traces(marker_size=10)  # Set the initial marker size for all points
 
     # Create a separate trace for the "Tu Consulta" point with a bigger marker size
@@ -112,6 +119,9 @@ start_nltk()
 download_umap()
 
 data = get_data()
+
+
+
 u = get_embedding()
 fit= get_umap()
 
