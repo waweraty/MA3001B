@@ -12,11 +12,7 @@ import umap.umap_ as umap_
 #import umap.plot
 import re
 import nltk
-nltk.download('punkt')
-nltk.download('wordnet')
-nltk.download('averaged_perceptron_tagger')
 from nltk.stem import WordNetLemmatizer
-lemmatizer = WordNetLemmatizer()
 from scipy.spatial.distance import braycurtis
 import plotly.express as px
 
@@ -28,6 +24,13 @@ st.sidebar.header("Dashboard")
 st.write(
     """Primeras visualizaciones"""
 )
+
+@st.cache_resource
+def start_nltk():
+    nltk.download('punkt')
+    nltk.download('wordnet')
+    nltk.download('averaged_perceptron_tagger')
+    lemmatizer = WordNetLemmatizer()
 
 @st.cache_resource
 def download_umap():
@@ -108,6 +111,7 @@ def visKnear(data, texto, umap,cattype, fit, K=10):
     fig.update_layout(title=("10 programas con títulos más similares a tu consulta, por " + cattype))
     fig.show()
 
+start_nltk()
 download_umap()
 
 data = get_data()
