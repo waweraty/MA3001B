@@ -80,12 +80,12 @@ def get_wordnet_pos(treebank_tag):
     else:
         return 'n' # assume noun as default
 
-def visKnear(data, texto,cattype, K=10):
+def visKnear(data, texto, umap,cattype, fit, K=10):
     vectorizer = get_vect()
     st.write('Running Visualization Function')
-    u = get_embedding()
-    fit= get_umap()
-    u=u.values
+    
+    
+    u=umap.values
 
     textoarray = (vectorizer.transform(texto)).toarray()
     distarr=[braycurtis(r, textoarray[0]) for r in data.iloc[:,:-3].values]
@@ -111,8 +111,8 @@ def visKnear(data, texto,cattype, K=10):
 download_umap()
 
 data = get_data()
-
-
+u = get_embedding()
+fit= get_umap()
 
 st.write(
     """En esta aplicación se ingresa el nombre del programa para ubicar a los 10 programas con títulos más cercanos"""
@@ -121,5 +121,5 @@ st.write(
 text_input = st.text_input('Nombre del programa', placeholder="Favor de ingresar el nombre del programa")
 
 if text_input:
-    visKnear(data, [text_input], 'activity_subtype', 10)
-    visKnear(data, [text_input], 'activity_subtype_id', 10)
+    visKnear(data, [text_input],u, 'activity_subtype', fit, 10)
+    visKnear(data, [text_input],u, 'activity_subtype_id', fit, 10)
