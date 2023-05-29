@@ -95,7 +95,7 @@ def visKnear(data, texto, umap,cattype, fit, K=10):
     u=umap.values
 
     textoarray = (vectorizer.transform(texto)).toarray()
-    distarr=[braycurtis(r, textoarray[0]) for r in data.iloc[:,:-3].values]
+    distarr=[braycurtis(r, textoarray[0]) for r in data.iloc[:,:-5].values]
     res = sorted(range(len(distarr)), key=lambda sub: distarr[sub])[:K]
 
     u_consulta = fit.transform(textoarray)
