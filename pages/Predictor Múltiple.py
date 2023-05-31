@@ -32,7 +32,7 @@ else:
     edited_df = st.experimental_data_editor(df_empty, num_rows = "dynamic", use_container_width = True)
 
 button_pred=st.button('Predecir valores', key='but_p', disabled= edited_df.empty)
-#st.write(button_pred)
+button_vis=st.button('Visualizar', key='but_v', disabled= edited_df.empty)
 
 if button_pred:
     pred=program_categorizer.categorize_program(edited_df['program_name'])
