@@ -24,7 +24,7 @@ if uploaded_file is not None:
     dataframe = pd.read_csv(uploaded_file)
     #st.write(dataframe)
 
-    edited_df = st.experimental_data_editor(dataframe['program_name'])
+    edited_df = st.experimental_data_editor(dataframe['program_name'], num_rows="dynamic")
 
     if st.button('Predecir valores'):
         pred=program_categorizer.categorize_program(dataframe['program_name'])
