@@ -32,7 +32,7 @@ else:
     edited_df = st.experimental_data_editor(df_empty, num_rows = "dynamic", use_container_width = True)
 
 
-col1, inter_cols_pace, col2 = st.columns((3, 8, 3))
+col1, inter_cols_pace, col2 = st.columns((3, 10, 3))
 
 with col1:
     button_pred=st.button('Predecir valores', key='but_p', disabled= edited_df.empty)
