@@ -131,7 +131,8 @@ def visKnear(data, texto, umap,cattype, fit, K=10):
         tu_consulta_trace.update_traces(marker=dict(size=15, color = 'OrangeRed', line=dict(color='Crimson', width=3), symbol = symbs[i]))
         fig.add_traces(tu_consulta_trace.data)
 
-    fig.update_layout(title=(str(K)+ " programas con títulos más similares a tu consulta, por "+ cattype), showlegend=False)
+    fig.update_layout(title=(str(K)+ " programas con títulos más similares a tu consulta, por "+ cattype))
+    #fig.update_layout(showlegend=False)
     st.plotly_chart(fig, use_container_width=True)
 
 start_nltk()
