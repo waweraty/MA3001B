@@ -28,8 +28,8 @@ if uploaded_file is not None:
 
     if st.button('Predecir valores'):
         pred=program_categorizer.categorize_program(edited_df)
-        pred['program_name']=edited_df
-        st.write(pred)
+        df=pd.concat([edited_df,pred],axis=1)
+        st.write(df)
         dataframe['Predictions']=pred
         dataframe
         
