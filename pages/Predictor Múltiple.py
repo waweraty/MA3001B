@@ -30,8 +30,8 @@ if uploaded_file is not None:
         pred=program_categorizer.categorize_program(edited_df)
         df=pd.concat([edited_df,pred],axis=1)
         st.write(df)
-        dataframe=dataframe.merge(df, how='outer', on='program_name')
-        st.write(dataframe)
+        #dataframe=dataframe.merge(df, how='outer', on='program_name')
+        #st.write(dataframe)
         
         csv = convert_df(dataframe)
 
@@ -42,3 +42,7 @@ if uploaded_file is not None:
             "text/csv",
             key='download-csv'
             )
+
+else:
+    df_empty = pd.DataFrame({'program_name' : []})
+    edited_df = st.experimental_data_editor(df_empty, num_rows="dynamic")
