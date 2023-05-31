@@ -1,5 +1,4 @@
 import streamlit as st
-import SessionState
 import pandas as pd
 import time
 import seaborn as sns
@@ -169,12 +168,11 @@ if button_pred:
         key='download-csv'
         )
 
-session_state = SessionState.get(name="", button_sent=False)
 
-if button_vis:
-    session_state.button_sent = True
+if st.session_state.get('button') != True:
+    st.session_state['button'] = button_vis
 
-if session_state.button_sent:
+if st.session_state['button']==True:
     K = st.slider('Selecciona el número de vecinos', 1, 100, 10)
 
     if st.button('Correr visualización'):
