@@ -64,6 +64,8 @@ def get_data():
 @st.cache_data
 def get_pred():
     pred=pd.read_csv('df_pred.csv')
+    pred['program_name']=pred['program_name'].str.strip()
+    pred.drop_duplicates(subset='program_name',inplace=True)
     return pred
 
 def preprocess_text(text):
