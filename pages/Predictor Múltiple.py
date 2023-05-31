@@ -30,7 +30,7 @@ if uploaded_file is not None:
         pred=program_categorizer.categorize_program(edited_df)
         df=pd.concat([edited_df,pred],axis=1)
         st.write(df)
-        dataframe=dataframe.merge(df, how='left', on='program_name')
+        dataframe=dataframe.merge(df, how='outer', on='program_name')
         st.write(dataframe)
         
         csv = convert_df(dataframe)
