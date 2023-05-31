@@ -31,7 +31,7 @@ else:
     df_empty['program_name']=df_empty['program_name'].astype('str')
     edited_df = st.experimental_data_editor(df_empty, num_rows="dynamic")
 
-button_pred=st.button('Predecir valores', key='but_p', disabled= not edited_df.empty)
+button_pred=st.button('Predecir valores', key='but_p', disabled= edited_df.empty)
 st.write(button_pred)
 
 if button_pred:
