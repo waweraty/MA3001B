@@ -24,7 +24,7 @@ if uploaded_file is not None:
     dataframe = pd.read_csv(uploaded_file)
     #st.write(dataframe)
 
-    edited_df = st.experimental_data_editor(dataframe['program_name'], num_rows="dynamic")
+    edited_df = st.experimental_data_editor(dataframe['program_name'].to_frame(), num_rows="dynamic")
 
 else:
     df_empty = pd.DataFrame({'program_name' : []})
@@ -35,7 +35,6 @@ button_pred=st.button('Predecir valores', key='but_p', disabled= edited_df.empty
 #st.write(button_pred)
 
 if button_pred:
-    st.write(edited_df)
     pred=program_categorizer.categorize_program(edited_df['program_name'])
     df=pd.concat([edited_df,pred],axis=1)
     st.write(df)
