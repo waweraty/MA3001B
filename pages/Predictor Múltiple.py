@@ -35,6 +35,7 @@ button_pred=st.button('Predecir valores', key='but_p', disabled= edited_df.empty
 #st.write(button_pred)
 
 if button_pred:
+    st.write(edited_df)
     pred=program_categorizer.categorize_program(edited_df)
     df=pd.concat([edited_df,pred],axis=1)
     st.write(df)
