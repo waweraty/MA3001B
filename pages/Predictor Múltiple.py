@@ -152,7 +152,7 @@ with col2:
 
 if button_pred:
     st.session_state['button'] = False
-    
+
     pred=program_categorizer.categorize_program(edited_df['program_name'])
     pred=pred.add_prefix('pred_')
     df=pd.concat([edited_df,pred],axis=1)
@@ -178,5 +178,5 @@ if st.session_state['button']==True:
     K = st.slider('Selecciona el número de vecinos', 1, 100, 10)
 
     if st.button('Correr visualización'):
-        visKnear(data, edited_df['program_name'].values,u, 'activity_subtype', fit, 10)
-        visKnear(data, edited_df['program_name'].values,u, 'activity_subtype_id', fit, 10)
+        visKnear(data, edited_df['program_name'].values,u, 'activity_subtype', fit, K)
+        visKnear(data, edited_df['program_name'].values,u, 'activity_subtype_id', fit, K)
