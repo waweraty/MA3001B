@@ -28,6 +28,7 @@ if uploaded_file is not None:
 
     if st.button('Predecir valores'):
         pred=program_categorizer.categorize_program(edited_df)
+        st.write(pred)
         dataframe['Predictions']=pred
         dataframe
         
