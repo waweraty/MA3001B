@@ -45,4 +45,5 @@ if uploaded_file is not None:
 
 else:
     df_empty = pd.DataFrame({'program_name' : []})
+    df_empty['program_name']=df_empty['program_name'].astype('str')
     edited_df = st.experimental_data_editor(df_empty, num_rows="dynamic")
