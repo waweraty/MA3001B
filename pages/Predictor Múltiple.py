@@ -24,12 +24,12 @@ if uploaded_file is not None:
     dataframe = pd.read_csv(uploaded_file)
     #st.write(dataframe)
 
-    edited_df = st.experimental_data_editor(dataframe['program_name'].to_frame(), num_rows="dynamic")
+    edited_df = st.experimental_data_editor(dataframe['program_name'].to_frame(), num_rows="dynamic", use_container_width = True)
 
 else:
     df_empty = pd.DataFrame({'program_name' : []})
     df_empty['program_name']=df_empty['program_name'].astype('str')
-    edited_df = st.experimental_data_editor(df_empty, num_rows="dynamic")
+    edited_df = st.experimental_data_editor(df_empty, num_rows = "dynamic", use_container_width = True)
 
 button_pred=st.button('Predecir valores', key='but_p', disabled= edited_df.empty)
 #st.write(button_pred)
