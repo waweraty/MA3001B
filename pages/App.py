@@ -171,7 +171,7 @@ with col1:
     button_pred=st.button('Predecir valores', key='but_p', disabled= edited_df.empty)
 
 with col2:
-    button_vis=st.button('Visualizar', key='but_v', disabled= np.logical_or(edited_df.empty,edited_df.shape[0]>55))
+    button_vis=st.button('Visualizar', key='but_v', disabled= edited_df.empty)
 
 if button_pred:
     st.session_state['button'] = False
@@ -197,9 +197,12 @@ if button_pred:
 if st.session_state.get('button') != True:
     st.session_state['button'] = button_vis
 
-if st.session_state['button']==True:
+if np.logical_and(st.session_state['button']==True,edited_df.shape[0]<=55):
     K = st.slider('Selecciona el número de vecinos', 1, 100, 10)
 
     if st.button('Correr visualización'):
         visKnear(data, edited_df['program_name'].values,u, 'activity_subtype', fit, K)
         visKnear(data, edited_df['program_name'].values,u, 'activity_subtype_id', fit, K)
+
+else:
+    st.write('Error: No se pueden visualizar más de 55 datos a la vez')
