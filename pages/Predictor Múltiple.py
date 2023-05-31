@@ -37,7 +37,7 @@ button_pred=st.button('Predecir valores', key='but_p', disabled= edited_df.empty
 if button_pred:
     pred=program_categorizer.categorize_program(edited_df['program_name'])
     df=pd.concat([edited_df,pred],axis=1)
-    st.write(df, use_container_width = True)
+    st.dataframe(df, use_container_width = True)
     #dataframe=dataframe.merge(df, how='outer', on='program_name')
     #st.write(dataframe)
     
