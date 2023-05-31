@@ -42,7 +42,7 @@ if button_pred:
     #dataframe=dataframe.merge(df, how='outer', on='program_name')
     #st.write(dataframe)
     
-    csv = convert_df(dataframe)
+    csv = convert_df(df)
 
     st.download_button(
         "Descargar csv",
