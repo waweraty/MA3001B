@@ -169,5 +169,8 @@ if button_pred:
         )
     
 if button_vis:
-    visKnear(data, edited_df['program_name'].values,u, 'activity_subtype', fit, 10)
-    visKnear(data, edited_df['program_name'].values,u, 'activity_subtype_id', fit, 10)
+    K = st.slider('Selecciona el número de vecinos', 1, 100, 10)
+
+    if st.button('Correr visualización'):
+        visKnear(data, edited_df['program_name'].values,u, 'activity_subtype', fit, 10)
+        visKnear(data, edited_df['program_name'].values,u, 'activity_subtype_id', fit, 10)
