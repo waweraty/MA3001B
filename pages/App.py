@@ -143,23 +143,26 @@ fit= get_umap()
 
 program_categorizer= ProgramCategorizer()
 
-st.markdown("# Predictor Múltiple")
-st.sidebar.header("Predictor Múltiple")
+st.markdown("# Aplicación interactiva")
+st.sidebar.header("Aplicación interactiva")
 
 st.write(
-    """En esta aplicación se ingresa un archivo .csv o de Excel para predecir múltiples instancias y
-    se regresa un archivo con una nueva columna con la categoría predicha"""
+    """En esta aplicación se ingresa un archivo .csv para predecir múltiples instancias o visualizar estos 
+    junto con sus vecinos, también si lo desea, puede ingresar manualmente uno o más nombres de programa
+    que desée
+    """
 )
 
 uploaded_file = st.file_uploader("Sube el archivo .csv con columna program_name", type=['csv'])
+st.write('Esta tabla de abajo es editable')
 
 if uploaded_file is not None:
     dataframe = pd.read_csv(uploaded_file)
     #st.write(dataframe)
-
     edited_df = st.experimental_data_editor(dataframe['program_name'].to_frame(), num_rows="dynamic", use_container_width = True)
 
 else:
+
     df_empty = pd.DataFrame({'program_name' : []})
     df_empty['program_name']=df_empty['program_name'].astype('str')
     edited_df = st.experimental_data_editor(df_empty, num_rows = "dynamic", use_container_width = True)
