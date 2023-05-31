@@ -151,6 +151,8 @@ with col2:
     button_vis=st.button('Visualizar', key='but_v', disabled= edited_df.empty)
 
 if button_pred:
+    st.session_state['button'] = False
+    
     pred=program_categorizer.categorize_program(edited_df['program_name'])
     pred=pred.add_prefix('pred_')
     df=pd.concat([edited_df,pred],axis=1)
