@@ -26,24 +26,27 @@ if uploaded_file is not None:
 
     edited_df = st.experimental_data_editor(dataframe['program_name'], num_rows="dynamic")
 
-    if st.button('Predecir valores'):
-        pred=program_categorizer.categorize_program(edited_df)
-        df=pd.concat([edited_df,pred],axis=1)
-        st.write(df)
-        #dataframe=dataframe.merge(df, how='outer', on='program_name')
-        #st.write(dataframe)
-        
-        csv = convert_df(dataframe)
-
-        st.download_button(
-            "Descargar csv",
-            csv,
-            "file.csv",
-            "text/csv",
-            key='download-csv'
-            )
-
 else:
     df_empty = pd.DataFrame({'program_name' : []})
     df_empty['program_name']=df_empty['program_name'].astype('str')
     edited_df = st.experimental_data_editor(df_empty, num_rows="dynamic")
+
+button_pred=st.button('Predecir valores', key='but_p', disabled=edited_df.empty)
+st.write(button_pred)
+
+if button_pred:
+    pred=program_categorizer.categorize_program(edited_df)
+    df=pd.concat([edited_df,pred],axis=1)
+    st.write(df)
+    #dataframe=dataframe.merge(df, how='outer', on='program_name')
+    #st.write(dataframe)
+    
+    csv = convert_df(dataframe)
+
+    st.download_button(
+        "Descargar csv",
+        csv,
+        "file.csv",
+        "text/csv",
+        key='download-csv'
+        )
