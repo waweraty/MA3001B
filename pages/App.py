@@ -16,7 +16,7 @@ import plotly.express as px
 from plotly.validators.scatter.marker import SymbolValidator
 from modelo_ifs import *
 
-st.set_page_config(page_title="Predictor Múltiple", page_icon="🦾")
+st.set_page_config(page_title="Aplicación Interactiva", page_icon="🦾")
 
 @st.experimental_memo
 def convert_df(df):
