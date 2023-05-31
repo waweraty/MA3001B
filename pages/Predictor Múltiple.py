@@ -6,7 +6,7 @@ st.set_page_config(page_title="Predictor Múltiple", page_icon="🦾")
 
 @st.experimental_memo
 def convert_df(df):
-   return df.to_csv(index=False).encode('utf-8')
+    return df.to_csv(index=False).encode('utf-8')
 
 program_categorizer= ProgramCategorizer()
 
@@ -18,11 +18,13 @@ st.write(
     se regresa un archivo con una nueva columna con la categoría predicha"""
 )
 
-uploaded_file = st.file_uploader("Sube el archivo .csv con columna program_name")
+uploaded_file = st.file_uploader("Sube el archivo .csv con columna program_name", type=['csv'])
 
 if uploaded_file is not None:
     dataframe = pd.read_csv(uploaded_file)
-    st.write(dataframe)
+    #st.write(dataframe)
+
+    edited_df = st.experimental_data_editor(dataframe)
 
     if st.button('Predecir valores'):
         pred=program_categorizer.categorize_program(dataframe['program_name'])
