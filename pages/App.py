@@ -171,7 +171,7 @@ with col1:
     button_pred=st.button('Predecir valores', key='but_p', disabled= edited_df.empty)
 
 with col2:
-    button_vis=st.button('Visualizar', key='but_v', disabled= edited_df.empty)
+    button_vis=st.button('Visualizar', key='but_v', disabled= np.logical_or(edited_df.empty,edited_def.shape[0]>55))
 
 if button_pred:
     st.session_state['button'] = False
