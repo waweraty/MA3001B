@@ -27,7 +27,7 @@ if uploaded_file is not None:
     edited_df = st.experimental_data_editor(dataframe['program_name'], num_rows="dynamic")
 
     if st.button('Predecir valores'):
-        dataframe["program_name"]=edited_df
+        dataframe["program_name"]=edited_df['program_name']
         pred=program_categorizer.categorize_program(dataframe['program_name'])
         dataframe['Predictions']=pred
         dataframe
