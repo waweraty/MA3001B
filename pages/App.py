@@ -11,7 +11,6 @@ import umap.umap_ as umap_
 import re
 import nltk
 from nltk.stem import WordNetLemmatizer
-from scipy.spatial.distance import braycurtis
 import plotly.express as px
 from plotly.validators.scatter.marker import SymbolValidator
 from modelo_ifs import *
@@ -86,50 +85,33 @@ def get_wordnet_pos(treebank_tag):
         return 'r' # adverb
     else:
         return 'n' # assume noun as default
-    
-def get_symbs():
-    raw_symbols = SymbolValidator().values
-    namestems = []
-    namevariants = []
-    symbols = []
-    for i in range(0,len(raw_symbols),3):
-        name = raw_symbols[i+2]
-        symbols.append(raw_symbols[i])
-        namestems.append(name.replace("-open", "").replace("-dot", ""))
-        namevariants.append(name[len(namestems[-1]):])
-
-    symbs=np.unique(np.array(namestems))
-    np.random.shuffle(symbs)
-    symbs = np.delete(symbs, np.where(symbs == 'circle'))
-    symbs = np.insert(symbs, 0, 'circle')
-
-    return symbs
 
 def visKnear(data, texto, umap,cattype, fit, K=10):
     pred=get_pred()
     vectorizer = get_vect()
     u=umap.values
-    symbs=get_symbs()
 
-    fig = px.scatter()
+    textoarray = (vectorizer.transform(texto)).toarray()
+    dists=np.stack([np.sum(np.absolute(r-textoarray), axis=1)/np.sum(np.absolute(r+textoarray), axis=1) for r in data.iloc[:,:-3].values],axis=1)
+    res = [sorted(range(len(d)), key=lambda sub: d[sub])[:K] for d in dists]
+    fullpred=pd.DataFrame()
+    for i,r in enumerate(res):
+        smp=pred.loc[pred['program_name'].isin(data.iloc[r]['program_name'].values)].copy()
+        smp['n_cons']=i
+        fullpred=pd.concat([fullpred, smp])
 
-    for i,t in enumerate(texto):
-        textoarray = (vectorizer.transform([t])).toarray()
-        distarr=[braycurtis(r, textoarray[0]) for r in data.iloc[:,:-3].values]
-        res = sorted(range(len(distarr)), key=lambda sub: distarr[sub])[:K]
+    u_consulta = fit.transform(textoarray)
+    tu_consulta_row = pd.DataFrame({'program_name':texto, 'activity_subtype':'Tu Consulta'},index=np.arange(len(texto)))
+    resf=[item for sublist in res for item in sublist]
 
-        u_consulta = fit.transform(textoarray)
-        tu_consulta_row = pd.DataFrame({'program_name':t, cattype:'Tu Consulta'},index=[0])
+    fig = px.scatter(fullpred, x=u[resf,0], y=u[resf,1], color=('pred_'+cattype), hover_name="program_name", log_x=False,symbol='n_cons')
+    fig.update_traces(marker=dict(size=10))
 
-        fign = px.scatter(pred.loc[pred['program_name'].isin(data.iloc[res]['program_name'].values)], x=u[res,0], y=u[res,1], color=('pred_'+cattype), hover_name="program_name", log_x=False)
-        fign.update_traces(marker=dict(size=10, symbol=symbs[i]))
-        fig.add_traces(fign.data)
+    # Create a separate trace for the "Tu Consulta" point with a bigger marker size
 
-        # Create a separate trace for the "Tu Consulta" point with a bigger marker size
-
-        tu_consulta_trace = px.scatter(tu_consulta_row, x=[u_consulta[0][0]], y=[u_consulta[0][1]], color=cattype, hover_name="program_name")
-        tu_consulta_trace.update_traces(marker=dict(size=15, color = 'OrangeRed', line=dict(color='Crimson', width=3), symbol = symbs[i]))
-        fig.add_traces(tu_consulta_trace.data)
+    tu_consulta_trace = px.scatter(tu_consulta_row, x=u_consulta[:,0], y=u_consulta[:,1], color=cattype, hover_name="program_name",symbol=tu_consulta_row.index)
+    tu_consulta_trace.update_traces(marker=dict(size=15, color = 'OrangeRed', line=dict(color='Crimson', width=3)))
+    fig.add_traces(tu_consulta_trace.data)
 
     fig.update_layout(title=(str(K)+ " programas con títulos más similares a tu consulta, por "+ cattype))
     #fig.update_layout(showlegend=False)
