@@ -190,7 +190,7 @@ if button_pred:
 if st.session_state.get('button') != True:
     st.session_state['button'] = button_vis
 
-if np.logical_and(st.session_state['button']==True,edited_df.shape[0]<=55):
+if np.logical_and(st.session_state['button']==True, 0<edited_df.shape[0]<=55):
     textoarray, u_consulta = transform_input(edited_df)
 
     K = st.slider('Selecciona el número de vecinos', 1, 100, 10)
