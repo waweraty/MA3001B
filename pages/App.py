@@ -66,6 +66,14 @@ def get_pred():
     pred.reset_index(drop = True, inplace = True)
     return pred
 
+@st.cache_data
+def transform_input(df):
+    vectorizer = get_vect()
+    textoarray = (vectorizer.transform(df['program_name'])).toarray()
+    u_consulta = fit.transform(textoarray)
+
+    return (textoarray, u_consulta)
+
 def preprocess_text(text):
     text = text.lower()
     text = re.sub(r'\b\d+\w*\b|\b\w*\d+\b', '', text)
@@ -183,9 +191,8 @@ if st.session_state.get('button') != True:
     st.session_state['button'] = button_vis
 
 if np.logical_and(st.session_state['button']==True,edited_df.shape[0]<=55):
-    vectorizer = get_vect()
-    textoarray = (vectorizer.transform(edited_df['program_name'])).toarray()
-    u_consulta = fit.transform(textoarray)
+    textoarray, u_consulta = transform_input(edited_df)
+
     K = st.slider('Selecciona el número de vecinos', 1, 100, 10)
 
     if st.button('Correr visualización'):
