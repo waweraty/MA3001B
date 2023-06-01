@@ -101,7 +101,7 @@ def visKnear(data, texto, umap,cattype, fit, K=10):
         fullpred=pd.concat([fullpred, smp])
 
     u_consulta = fit.transform(textoarray)
-    tu_consulta_row = pd.DataFrame({'program_name':texto, 'activity_subtype':'Tu Consulta'},index=np.arange(len(texto)))
+    tu_consulta_row = pd.DataFrame({'program_name':texto, cattype:'Tu Consulta'},index=np.arange(len(texto)))
     resf=[item for sublist in res for item in sublist]
 
     fig = px.scatter(fullpred, x=u[resf,0], y=u[resf,1], color=('pred_'+cattype), hover_name="program_name", log_x=False,symbol='n_cons')
