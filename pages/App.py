@@ -86,12 +86,10 @@ def get_wordnet_pos(treebank_tag):
     else:
         return 'n' # assume noun as default
 
-def visKnear(data, texto, umap,cattype, fit, K=10):
+def visKnear(data, texto, umap, u_consulta,cattype, textoarray, K=10):
     pred=get_pred()
-    vectorizer = get_vect()
     u=umap.values
 
-    textoarray = (vectorizer.transform(texto)).toarray()
     dists=np.stack([np.sum(np.absolute(r-textoarray), axis=1)/np.sum(np.absolute(r+textoarray), axis=1) for r in data.iloc[:,:-3].values],axis=1)
     res = [sorted(range(len(d)), key=lambda sub: d[sub])[:K] for d in dists]
     fullpred=pd.DataFrame()
@@ -100,7 +98,6 @@ def visKnear(data, texto, umap,cattype, fit, K=10):
         smp['n_cons']=i
         fullpred=pd.concat([fullpred, smp])
 
-    u_consulta = fit.transform(textoarray)
     tu_consulta_row = pd.DataFrame({'program_name':texto, cattype:'Tu Consulta'},index=np.arange(len(texto)))
     resf=[item for sublist in res for item in sublist]
 
@@ -183,11 +180,14 @@ if st.session_state.get('button') != True:
     st.session_state['button'] = button_vis
 
 if np.logical_and(st.session_state['button']==True,edited_df.shape[0]<=55):
+    vectorizer = get_vect()
+    textoarray = (vectorizer.transform(edited_df['program_name'])).toarray()
+    u_consulta = fit.transform(textoarray)
     K = st.slider('Selecciona el número de vecinos', 1, 100, 10)
 
     if st.button('Correr visualización'):
-        visKnear(data, edited_df['program_name'].values,u, 'activity_subtype', fit, K)
-        visKnear(data, edited_df['program_name'].values,u, 'activity_subtype_id', fit, K)
+        visKnear(data, edited_df['program_name'].values,u, u_consulta, 'activity_subtype', textoarray, K)
+        visKnear(data, edited_df['program_name'].values,u, u_consulta, 'activity_subtype_id', textoarray, K)
 
 elif np.logical_and(st.session_state['button']==True,edited_df.shape[0]>55):
     st.write('Error: No se pueden visualizar más de 55 datos a la vez')
