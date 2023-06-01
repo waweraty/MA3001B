@@ -62,6 +62,8 @@ def get_pred():
     pred=pd.read_csv('df_pred.csv')
     pred['program_name']=pred['program_name'].str.strip()
     pred.drop_duplicates(subset='program_name',inplace=True)
+    pred=pred.iloc[:,1:]
+    pred.reset_index(drop = True, inplace = True)
     return pred
 
 def preprocess_text(text):
@@ -93,8 +95,9 @@ def visKnear(data, texto, umap, u_consulta,cattype, textoarray, K=10):
     dists=np.stack([np.sum(np.absolute(r-textoarray), axis=1)/np.sum(np.absolute(r+textoarray), axis=1) for r in data.iloc[:,:-3].values],axis=1)
     res = [sorted(range(len(d)), key=lambda sub: d[sub])[:K] for d in dists]
     fullpred=pd.DataFrame()
+
     for i,r in enumerate(res):
-        smp=pred.loc[pred['program_name'].isin(data.iloc[r]['program_name'].values)].copy()
+        smp=pred.iloc[r].copy()
         smp['n_cons']=i
         fullpred=pd.concat([fullpred, smp])
 
