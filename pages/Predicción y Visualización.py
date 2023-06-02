@@ -201,4 +201,4 @@ if np.logical_and(st.session_state['button']==True, 0<edited_df.shape[0]<=55):
         visKnear(data, edited_df['program_name'].values,u, u_consulta, 'activity_subtype_id', textoarray, K)
 
 elif np.logical_and(st.session_state['button']==True,edited_df.shape[0]>55):
-    st.write('Error: No se pueden visualizar más de 55 datos a la vez')
+    st.error('Error: No se pueden visualizar más de 55 datos a la vez')
