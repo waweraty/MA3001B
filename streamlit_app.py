@@ -14,7 +14,7 @@ st.set_page_config(
     page_icon="👋",
 )
 
-st.header('🌼🌼 Equipo 1 🌼🌼')
+st.title('🌼🌼 Equipo 1 🌼🌼')
 st.write('Ernesto Borbón, Gerardo Villegas, José de Jesús Gutiérrez, Luis Felipe Villaseñor')
 
 st.write("## Visualizador y Predictor de Categoría de Programas Para Market Development Funds")
