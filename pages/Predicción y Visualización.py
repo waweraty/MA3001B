@@ -15,7 +15,7 @@ import plotly.express as px
 from plotly.validators.scatter.marker import SymbolValidator
 from modelo_ifs import *
 
-st.set_page_config(page_title="Aplicación Interactiva", page_icon="🦾")
+st.set_page_config(page_title="Predicción y Visualización", page_icon="🦾")
 
 @st.experimental_memo
 def convert_df(df):
@@ -133,8 +133,8 @@ fit= get_umap()
 
 program_categorizer= ProgramCategorizer()
 
-st.markdown("# Aplicación interactiva")
-st.sidebar.header("Aplicación interactiva")
+st.markdown("# Predicción y Visualización")
+st.sidebar.header("Predicción y Visualización")
 
 st.write(
     """En esta aplicación se ingresa un archivo .csv para predecir múltiples instancias o visualizar estos 
