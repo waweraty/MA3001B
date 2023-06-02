@@ -31,5 +31,15 @@ st.write('''
         de los datos para la variable categórica de *activity_subtype* y el 99% de los datos fueron correctamente categorizados para 
         la variable categórica de *activity_subtype_id*.\n
 
+        Esta aplicación te permite ingresar de manera manual los nombres de los programas que se quieran consultar en la tabla
+        interactiva o subir un archivo *csv* que contenga una columna titulada *program_name* con los nombres de los programas
+        que se quieran consultar, esta columna se despliega para confirmar que sea el archivo correcto y, de igual manera,
+        esta tabla es editable en caso de querer eliminar ciertos datos o si se requiere consultar un nombre que no se encuentre
+        en el archivo original.\n
 
+        Una vez cargados los datos se puede hacer uso de una de las dos funciones, por una parte se pueden visualizar hasta 55 datos
+        junto con el número de vecinos que se deseen (de 1 a 100) de la base de datos original con nuestras categorías predichas. Por
+        otra parte, también se pueden predecir las categorías correspondientes a los datos ingresados, desplegando así una tabla con
+        el nombre del programa y nuestras predicciones correspondientes, una vez hecha esta predicción, se puede copiar y pegar esta
+        tabla en el software de su elección o si lo prefiere, también se puede descargar en formato *csv*.
         ''')
