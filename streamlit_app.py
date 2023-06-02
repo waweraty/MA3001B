@@ -26,9 +26,9 @@ st.write('''
         manera de automatizar este proceso, reduciendo así los tiempos de clasificación sin sacrificar el desempeño de la
         clasificación de los programas.\n
 
-        Para resolver esta problemática, se realizó un modelo hecho a mano basado en reglas más representativas de cada categoría,
+        Para resolver esta problemática, se realizó un modelo hecho a mano basado en las reglas más representativas de cada categoría,
         al igual que realizar una jerarquía de importancia de estas reglas. Con este modelo se logró categorizar correctamente el 100%
-        de los datos para la variable categórica de *activity_subtype* y el 99%% de los datos fueron correctamente categorizados para 
+        de los datos para la variable categórica de *activity_subtype* y el 99% de los datos fueron correctamente categorizados para 
         la variable categórica de *activity_subtype_id*.\n
 
 
