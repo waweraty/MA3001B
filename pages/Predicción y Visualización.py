@@ -27,6 +27,7 @@ def start_nltk():
     nltk.download('wordnet')
     nltk.download('averaged_perceptron_tagger')
     lemmatizer = WordNetLemmatizer()
+    return lemmatizer
 
 @st.cache_resource
 def download_umap():
@@ -125,7 +126,7 @@ def visKnear(data, texto, umap, u_consulta,cattype, textoarray, K=10):
     #fig.update_layout(showlegend=False)
     st.plotly_chart(fig, use_container_width=True)
 
-start_nltk()
+lemmatizer=start_nltk()
 download_umap()
 data = get_data()
 u = get_embedding()
