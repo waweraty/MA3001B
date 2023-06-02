@@ -14,6 +14,6 @@ st.set_page_config(
     page_icon="👋",
 )
 
-st.header('Ramos Blancos')
+st.header('Equipo 1 🌼🌼🌼🌼')
 st.header("Predictor de Categoría de Programas Para Market Development Funds")
 st.write('Favor de seleccionar la aplicación deseada en el menú de la izquierda')
