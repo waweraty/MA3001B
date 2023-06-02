@@ -140,7 +140,7 @@ st.sidebar.header("Predicción y Visualización")
 st.write(
     """En esta aplicación se ingresa un archivo .csv para predecir múltiples instancias o visualizar estos 
     junto con sus vecinos, también si lo desea, puede ingresar manualmente uno o más nombres de programa
-    que desée
+    que desee.
     """
 )
 
